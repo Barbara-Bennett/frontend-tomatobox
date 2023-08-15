@@ -1,71 +1,56 @@
-# Getting Started with Create React App
+# Tomato Box: Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Introduction
+The TomatoBox Inventory Management WebApp is a comprehensive tool that assists intermediaries, known as "go-betweens," who play a crucial role between farm producers and merchants. This web application empowers go-betweens to efficiently manage their inventory of Tomato Boxes, enabling them to monitor stock levels with producers and merchants while tracking the boxes' condition. With customer registration, transaction logging, borrowed box tracking, and damage box management, go-betweens can make well-informed decisions, streamline operations, and foster strong relationships with producers and merchants.
 
-In the project directory, you can run:
 
-### `npm start`
+## Backend GitHub Repository
+[https://github.com/Barbara-Bennett/backend-tomatobox](https://github.com/Barbara-Bennett/backend-tomatobox)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Accessing the Web Application
+[https://tomatobox.vercel.app/](https://tomatobox.vercel.app/)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation and Configuration
+React is a JavaScript library that makes creating fast and reusable user interfaces simple. It uses components and a virtual DOM to efficiently update and render UI components, resulting in a smoother user experience.
 
-### `npm run build`
+To run the frontend locally, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Create a folder to hold the backend and frontend repositories: `mkdir tomato-box-project`
+2. Navigate to the project folder: `cd tomato-box-project`
+3. Clone the frontend repository: `https://github.com/Barbara-Bennett/frontend-tomatobox.git`
+4. Navigate to the project directory: `cd frontend`
+5. Install required dependencies using npm: `npm install`
+6. Start the development server: `npm start`
+7. Access the web application locally: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## List of requirements:
+├── @popperjs/core@2.11.8
+├── @testing-library/jest-dom@5.17.0
+├── @testing-library/react@13.4.0
+├── @testing-library/user-event@13.5.0
+├── axios@1.4.0
+├── bootstrap@5.3.1
+├── cdbreact@1.5.18
+├── date-fns@2.30.0
+├── react-bootstrap@2.8.0
+├── react-dom@18.2.0
+├── react-icons@4.10.1
+├── react-router-dom@6.15.0
+├── react-scripts@5.0.1
+├── react@18.2.0
+└── web-vitals@2.1.4
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Reporting Bugs or Contributing
+If you encounter any issues or want to contribute to the project, you can do so by making pull requests on the GitHub repository or by sending private messages to the project maintainers. Your feedback and contributions are valuable for improving the TomatoBox Inventory Management WebApp.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Architecture Diagram
+![WhatsApp Image 2023-07-07 at 10 08 40 AM](https://github.com/Barbara-Bennett/backend-tomatobox/assets/97815099/210a0b7a-f101-41ea-80e6-f707702bc948)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# frontend
