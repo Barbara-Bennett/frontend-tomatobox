@@ -14,7 +14,7 @@ The TomatoBox Inventory Management WebApp is a comprehensive tool that assists i
 
 
 ## Installation and Configuration
-React is a JavaScript library that makes creating fast and reusable user interfaces simple. It uses components and a virtual DOM to efficiently update and render UI components, resulting in a smoother user experience.
+This project frontend is built using React, a JavaScript library that simplifies creating fast and reusable user interfaces, and Bootstrap5. It uses components and a virtual DOM to efficiently update and render UI components, resulting in a smoother user experience.
 
 To run the frontend locally, follow these steps:
 
