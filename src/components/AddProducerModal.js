@@ -59,7 +59,7 @@ const AddProducerModal = (props) => {
 					<Row className='row-css'>
 						<Col>
 							<Form.Group controlId="address">
-								<Form.Label>Adress</Form.Label>
+								<Form.Label>Address</Form.Label>
 								<Form.Control type="text" name="address" required placeholder="" />
 							</Form.Group>
 							</Col>

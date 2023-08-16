@@ -128,7 +128,7 @@ function MerchantManager() {
               <th>ID</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Adress</th>
+              <th>Address</th>
               <th>Email</th>
               <th>Phone</th>
               <th>Payment</th>

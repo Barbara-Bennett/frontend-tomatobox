@@ -57,7 +57,7 @@ const UpdateProducerModal = (props) => {
 					<Row className='row-css'>
 						<Col>
 							<Form.Group controlId="address">
-								<Form.Label>Adress</Form.Label>
+								<Form.Label>Address</Form.Label>
 								<Form.Control type="text" name="address" required defaultValue={props.producer.address} placeholder="" />
 							</Form.Group>
 							</Col>
