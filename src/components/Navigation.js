@@ -1,8 +1,7 @@
 import React from 'react';
-import {Navbar, Nav} from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
 import logo from "../static/logo.png";
 import "../App.css";
-
 
 const Navigation = ( ) => {
   return(
@@ -12,9 +11,7 @@ const Navigation = ( ) => {
           <img className="d-inline-block align-top img-logo" alt="app logo: red tomato" src={logo} />{' '}
           <span className="text-logo">Tomato Box</span>
         </Navbar.Brand>
-
       </Navbar>
-
     </div>
   );
 };
