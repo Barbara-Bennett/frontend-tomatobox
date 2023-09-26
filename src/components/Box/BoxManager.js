@@ -6,6 +6,7 @@ import DamageBoxModal from './DamageBoxModal';
 import AddNewBoxModal from './AddNewBoxModal';
 import '../../App.css';
 
+
 function BoxManager() {
   const [boxes, setBoxes] = useState([]);
   const [damageBoxModalShow, setDamageBoxModalShow] = useState(false); 
