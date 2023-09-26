@@ -6,6 +6,7 @@ import producerLogo from "../static/producerLogo.jpg"
 import { getBoxes } from '../services/BoxService';
 import "../App.css";
 
+
 const Home = () => {
   const [boxes, setBoxes] = useState([]);
 

@@ -1,7 +1,4 @@
 import React from 'react';
-import "../App.css";
-
-
 import { NavLink } from 'react-router-dom';
 import {
   CDBSidebar,
@@ -10,6 +7,7 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
+import "../App.css";
 
 
 const Sidebar = ( ) => {
