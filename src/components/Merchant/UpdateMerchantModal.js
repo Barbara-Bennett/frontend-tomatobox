@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Col, Row, Form, Button } from 'react-bootstrap';
 import { FormControl, FormGroup, FormLabel } from 'react-bootstrap';
-import { updateMerchant } from '../services/MerchantService'; 
+import { updateMerchant } from '../../services/MerchantService'; 
 
 const UpdateMerchantModal = (props) => {
 

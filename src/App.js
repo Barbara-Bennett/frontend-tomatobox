@@ -4,11 +4,11 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
-import ProducerManager from "./components/ProducerManager";
-import ProducerTransactionManager from "./components/ProducerTransactionManager";
-import MerchantManager from "./components/MerchantManager";
-import MerchantTransactionManager from "./components/MerchantTransactionManager";
-import BoxManager from "./components/BoxManager";
+import ProducerManager from "./components/Producer/ProducerManager";
+import ProducerTransactionManager from "./components/ProducerTransaction/ProducerTransactionManager";
+import MerchantManager from "./components/Merchant/MerchantManager";
+import MerchantTransactionManager from "./components/MerchantTransaction/MerchantTransactionManager";
+import BoxManager from "./components/Box/BoxManager";
 import Sidebar from "./components/Sidebar";
 
 

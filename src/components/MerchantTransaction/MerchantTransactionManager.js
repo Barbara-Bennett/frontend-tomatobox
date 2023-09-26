@@ -5,10 +5,10 @@ import { Table } from 'react-bootstrap';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { getMerchantsTransactions, deleteMerchantTransaction } from '../services/MerchantTransactionService';
+import { getMerchantsTransactions, deleteMerchantTransaction } from '../../services/MerchantTransactionService';
 import AddMerchantTransactionModal from "./AddMerchantTransactionModal";
 import UpdateMerchantTransactionModal from "./UpdateMerchantTransactionModal";
-import "../App.css";
+import "../../App.css";
 
 import { format } from 'date-fns';
 

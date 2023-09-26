@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Col, Row, Form, Button } from 'react-bootstrap';
 import { FormControl, FormGroup, FormLabel } from 'react-bootstrap';
-import { damageBox } from '../services/BoxService';
-import '../App.css';
+import { damageBox } from '../../services/BoxService';
+import '../../App.css';
 
 const DamageBoxModal = (props) => {
 	const [errorMessage, setErrorMessage] = useState("");

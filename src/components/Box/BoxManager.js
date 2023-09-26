@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { getBoxes } from '../services/BoxService';
+import { getBoxes } from '../../services/BoxService';
 import DamageBoxModal from './DamageBoxModal'; 
 import AddNewBoxModal from './AddNewBoxModal';
-import '../App.css';
+import '../../App.css';
 
 function BoxManager() {
   const [boxes, setBoxes] = useState([]);

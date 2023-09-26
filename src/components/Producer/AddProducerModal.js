@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {Modal, Col, Row, Form, Button} from 'react-bootstrap';
 import {FormControl, FormGroup, FormLabel} from 'react-bootstrap';
-import { addProducer} from '../services/ProducerService';
-import "../App.css"
+import { addProducer} from '../../services/ProducerService';
+import "../../App.css";
 
 const AddProducerModal = (props) => {
   const [errorMessage, setErrorMessage] = useState("");

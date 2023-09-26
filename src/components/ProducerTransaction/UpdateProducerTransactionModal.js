@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Col, Row } from 'react-bootstrap';
 import { FormLabel, FormGroup } from 'react-bootstrap';
-import { updateProducerTransaction } from '../services/ProducerTransactionService';
-import { getProducers } from '../services/ProducerService';
-import {getBox, addNewBox} from '../services/BoxService';
-import {getProducer, updateProducer} from '../services/ProducerService';
-import "../App.css"
+import { updateProducerTransaction } from '../../services/ProducerTransactionService';
+import { getProducers } from '../../services/ProducerService';
+import {getBox, addNewBox} from '../../services/BoxService';
+import {getProducer, updateProducer} from '../../services/ProducerService';
+import "../../App.css"
 
 const UpdateProducerTransactionModal = (props) => {
   const [initialBoxQtt, setInitialBoxQtt] = useState(0);

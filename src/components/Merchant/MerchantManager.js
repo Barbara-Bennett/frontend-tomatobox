@@ -5,12 +5,12 @@ import { Table } from 'react-bootstrap';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { getMerchants, deleteMerchant } from '../services/MerchantService';
-import { getMerchantTransactions } from '../services/MerchantTransactionService';
-import { MerchantTransactionManager } from './MerchantTransactionManager';
+import { getMerchants, deleteMerchant } from '../../services/MerchantService';
+import { getMerchantTransactions } from '../../services/MerchantTransactionService';
+import { MerchantTransactionManager } from '../MerchantTransaction/MerchantTransactionManager';
 import AddMerchantModal from "./AddMerchantModal";
 import UpdateMerchantModal from "./UpdateMerchantModal";
-import "../App.css";
+import "../../App.css";
 
 function MerchantManager() {
   const [originalMerchants, setOriginalMerchants] = useState([]);

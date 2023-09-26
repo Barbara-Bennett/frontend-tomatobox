@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Col, Row, Form, Button } from 'react-bootstrap';
 import { FormControl, FormGroup, FormLabel } from 'react-bootstrap';
-import { addMerchantTransaction } from '../services/MerchantTransactionService';
-import { getMerchants } from '../services/MerchantService';
-import { getBox, addNewBox } from '../services/BoxService';
-import { getMerchant, updateMerchant } from '../services/MerchantService';
-import "../App.css"
+import { addMerchantTransaction } from '../../services/MerchantTransactionService';
+import { getMerchants } from '../../services/MerchantService';
+import { getBox, addNewBox } from '../../services/BoxService';
+import { getMerchant, updateMerchant } from '../../services/MerchantService';
+import "../../App.css"
 
 const AddMerchantTransactionModal = (props) => {
   const [errorMessage, setErrorMessage] = useState("");

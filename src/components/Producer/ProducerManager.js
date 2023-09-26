@@ -5,12 +5,12 @@ import { Table } from 'react-bootstrap';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { getProducers, deleteProducer } from '../services/ProducerService';
-import { getProducersTransactions } from '../services/ProducerTransactionService';
-import {ProducerTransactionManager} from './ProducerTransactionManager'
+import { getProducers, deleteProducer } from '../../services/ProducerService';
+import { getProducersTransactions } from '../../services/ProducerTransactionService';
+import {ProducerTransactionManager} from '../ProducerTransaction/ProducerTransactionManager'
 import AddProducerModal from "./AddProducerModal";
 import UpdateProducerModal from "./UpdateProducerModal";
-import "../App.css";
+import "../../App.css";
 
 function ProducerManager() {
   const [originalProducers, setOriginalProducers] = useState([]);

@@ -4,7 +4,7 @@ import inventoryLogo from "../static/inventoryLogo.jpg";
 import merchantLogo from "../static/merchantLogo.jpg"
 import producerLogo from "../static/producerLogo.jpg"
 import { getBoxes} from '../services/BoxService';
-import BoxManager from './BoxManager';
+import BoxManager from './Box/BoxManager';
 import "../App.css";
 
 const Home = ( ) => {

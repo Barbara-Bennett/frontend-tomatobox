@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Col, Row, Form, Button } from 'react-bootstrap';
 import { FormControl, FormGroup, FormLabel } from 'react-bootstrap';
-import { addMerchant } from '../services/MerchantService'; 
-import '../App.css';
+import { addMerchant } from '../../services/MerchantService'; 
+import '../../App.css';
 
 const AddMerchantModal = (props) => {
   const [errorMessage, setErrorMessage] = useState('');

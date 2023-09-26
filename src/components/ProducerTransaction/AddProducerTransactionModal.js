@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {Modal, Col, Row, Form, Button} from 'react-bootstrap';
 import {FormControl, FormGroup, FormLabel} from 'react-bootstrap';
-import { addProducerTransaction} from '../services/ProducerTransactionService';
-import { getProducers } from '../services/ProducerService';
-import {getBox, addNewBox} from '../services/BoxService';
-import {getProducer, updateProducer} from '../services/ProducerService';
-import "../App.css"
+import { addProducerTransaction} from '../../services/ProducerTransactionService';
+import { getProducers } from '../../services/ProducerService';
+import {getBox, addNewBox} from '../../services/BoxService';
+import {getProducer, updateProducer} from '../../services/ProducerService';
+import "../../App.css"
 
 const AddProducerTransactionModal = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
