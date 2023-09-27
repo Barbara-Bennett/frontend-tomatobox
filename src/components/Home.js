@@ -33,19 +33,23 @@ const Home = () => {
           <h4 className="cards-title">{title}</h4>
         </Card.Title>
         <Card.Text className="cards">
-          <span className="span-css">Total of premium boxes</span> <br />
+          <span className="span-css">Total of premium boxes</span>
+          <br />
           {boxes
             .filter((bx) => bx.box_type === 'premium')
-            .map((bx) => <p key={bx[keyType]}>{bx[borrowedProperty]}</p>)}
-          <span className="span-css">Total of common boxes</span> <br />
+            .map((bx) => <span key={bx[keyType]}>{bx[borrowedProperty]}</span>)}
+          <br />
+          <span className="span-css">Total of common boxes</span>
+          <br />
           {boxes
             .filter((bx) => bx.box_type === 'common')
-            .map((bx) => <p key={bx[keyType]}>{bx[borrowedProperty]}</p>)}
+            .map((bx) => <span key={bx[keyType]}>{bx[borrowedProperty]}</span>)}
+
         </Card.Text>
       </Card.Body>
     </Card>
   );
-
+  
   return (
     <div className="cards-container">
       <div className="d-flex justify-content-around">
