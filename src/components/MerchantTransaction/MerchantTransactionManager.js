@@ -9,6 +9,7 @@ import { getMerchantsTransactions, deleteMerchantTransaction } from '../../servi
 import AddMerchantTransactionModal from "./AddMerchantTransactionModal";
 import UpdateMerchantTransactionModal from "./UpdateMerchantTransactionModal";
 import "../../App.css";
+import { handleSearchOnChange, handleShowAll, SearchInputGroup } from "../../helpers/searchHelpers";
 
 import { format } from 'date-fns';
 
@@ -56,28 +57,18 @@ function MerchantTransactionManager() {
     setAddModalShow(true);
   };
 
-  const handleSearchOnChange = (e) => {
-    const value = e.target.value;
-    setSearchQuery(value);
-    if (value.trim() === "") {
-      setMerchantsTransactions(originalMerchantsTransactions);
-      setShowAll(true);
-    } else {
-      const searchKeywords = value.toLowerCase().split(" ");
-      const filteredMerchantsTransactions = originalMerchantsTransactions.filter((merTra) => {
-        const fullName = `${merTra.merchant_name}`.toLowerCase();
-        return searchKeywords.some(keyword => fullName.includes(keyword));
-      });
-      setMerchantsTransactions(filteredMerchantsTransactions);
-      setShowAll(false);
-    }
+  const handleSearch = (e) => {
+    handleSearchOnChange(
+      e.target.value, originalMerchantsTransactions, setSearchQuery,
+      setMerchantsTransactions, setShowAll, (item) => item 
+    );
   };
-
-  const handleShowAll = (e) => {
+  
+  const handleShowAllTransactionMerchants = (e) => {
     e.preventDefault();
-    setMerchantsTransactions(originalMerchantsTransactions);
-    setSearchQuery("");
-    setShowAll(true);
+    handleShowAll(
+      originalMerchantsTransactions, setMerchantsTransactions, setSearchQuery, setShowAll,
+    );
   };
 
   const handleDelete = (e, merchantTransactionId) => {
@@ -125,14 +116,14 @@ function MerchantTransactionManager() {
         <InputGroup className='input-group'>
           <Form.Control
             className='input-search'
-            placeholder="Search MerchantTransaction"
+            placeholder="Search Merchant Transaction"
             aria-label="Recipient's username with two button addons"
             value={searchQuery}
-            onChange={handleSearchOnChange}
+            onChange={handleSearch}
           />
           <ButtonToolbar>
             {!showAll && (
-              <Button variant="outline-secondary" onClick={handleShowAll} className="btn-show-all btn-form">
+              <Button variant="outline-secondary" onClick={handleShowAllTransactionMerchants} className="btn-show-all btn-form">
                 Show All
               </Button>
             )}

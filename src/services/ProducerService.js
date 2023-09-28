@@ -24,8 +24,6 @@ export function deleteProducer(producerId) {
 
 
 export function addProducer(producer){
-  console.log("Aqui, agora, sou eu dentro do metodo addProducer")
-  console.log(producer)
   return axios.post('https://tomatobox-backend-4j2l.onrender.com/producers/', {
     producerId:null,
     first_name:producer.first_name.value,

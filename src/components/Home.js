@@ -39,6 +39,7 @@ const Home = () => {
             .filter((bx) => bx.box_type === 'premium')
             .map((bx) => <span key={bx[keyType]}>{bx[borrowedProperty]}</span>)}
           <br />
+          <br />
           <span className="span-css">Total of common boxes</span>
           <br />
           {boxes

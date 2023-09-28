@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { React, useState } from 'react';
 import {Modal, Col, Row, Form, Button} from 'react-bootstrap';
-import {FormControl, FormGroup, FormLabel} from 'react-bootstrap';
+// import {FormControl, FormGroup, FormLabel} from 'react-bootstrap';
 import { addProducer} from '../../services/ProducerService';
 import "../../App.css";
 
@@ -17,6 +17,7 @@ const AddProducerModal = (props) => {
       })
       .catch((error) => {
         setErrorMessage("Failed to Add Producer");
+				console.log(error)
       });
   };
 
@@ -27,7 +28,8 @@ const AddProducerModal = (props) => {
 				{...props}
 				size="mg"
 				aria-labelledby="contained-modal-title-vcenter"
-				centered >
+				centered 
+				onShow={() => setErrorMessage("")}>
 
 				<Modal.Header className='header-modal' closeButton>
 						<Modal.Title className='header-modal' id="contained-modal-title-vcenter">

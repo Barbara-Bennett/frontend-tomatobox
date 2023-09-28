@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { InputGroup } from 'react-bootstrap';
-import { Table } from 'react-bootstrap';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { React, useEffect, useState } from 'react';
+import { Table, Button } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { getProducers, deleteProducer } from '../../services/ProducerService';
-import { getProducersTransactions } from '../../services/ProducerTransactionService';
-import {ProducerTransactionManager} from '../ProducerTransaction/ProducerTransactionManager'
-import AddProducerModal from "./AddProducerModal";
+import { 
+  handleSearchOnChange, 
+  handleShowAll, 
+  SearchBar 
+  } from "../../helpers/searchHelpers";
 import UpdateProducerModal from "./UpdateProducerModal";
 import "../../App.css";
 
@@ -21,7 +20,6 @@ function ProducerManager() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showAll, setShowAll] = useState(true);
-  console.log(producers)
 
   useEffect(() => {
     let mounted = true;
@@ -53,29 +51,19 @@ function ProducerManager() {
     setAddModalShow(true);
   };
 
-  const handleSearchOnChange = (e) => {
-    const value = e.target.value;
-    setSearchQuery(value);
-    if (value.trim() === "") {
-      setProducers(originalProducers);
-      setShowAll(true);
-    } else {
-      const searchKeywords = value.toLowerCase().split(" ");
-      const filteredProducers = originalProducers.filter((pro) => {
-        const fullName = `${pro.first_name} ${pro.last_name}`.toLowerCase();
-        return searchKeywords.some(keyword => fullName.includes(keyword));
-      });
-      setProducers(filteredProducers);
-      setShowAll(false);
-    }
-  };
+  const handleSearch = (e) => {
+  handleSearchOnChange(
+    e.target.value, originalProducers, setSearchQuery, setProducers, 
+    setShowAll, (item) => item 
+  );
+};
 
-  const handleShowAll = (e) => {
-    e.preventDefault();
-    setProducers(originalProducers);
-    setSearchQuery("");
-    setShowAll(true);
-  };
+const handleShowAllProducers = (e) => {
+  e.preventDefault();
+  handleShowAll(
+    originalProducers, setProducers, setSearchQuery, setShowAll,
+  );
+};
 
   const handleDelete = (e, producerId) => {
     if (window.confirm('Are you sure ?')) {
@@ -98,31 +86,22 @@ function ProducerManager() {
     <div className="side-container manage-tab content">
       <div className="row side-row">
         <h1 className="title">PRODUCERS</h1>
-        <InputGroup className='input-group'>
-          <Form.Control
-            className='input-search'
-            placeholder="Search Producer"
-            aria-label="Recipient's username with two button addons"
-            value={searchQuery}
-            onChange={handleSearchOnChange}
-          />
-          <ButtonToolbar>
-            {!showAll && (
-              <Button variant="outline-secondary" onClick={handleShowAll} className="btn-show-all btn-form">
-                Show All
-              </Button>
-            )}
-          </ButtonToolbar>
-          <ButtonToolbar>
-            <Button variant="success" onClick={handleAdd} className="btn-add btn-form">
-              + NEW
-            </Button>
-            <AddProducerModal show={addModalShow} setIsUpdated={setIsUpdated}
-              onHide={AddModelClose}></AddProducerModal>
-          </ButtonToolbar>
-        </InputGroup>
 
-        <Table bsPrefix="table custom-table" size='sm' borderless hover className="react-bootstrap-table" id="dataTable">
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          showAll={showAll}
+          handleShowAll={handleShowAllProducers}
+          handleAdd={handleAdd}
+          addModalShow={addModalShow}
+          setIsUpdated={setIsUpdated}
+          AddModelClose={AddModelClose}
+          handleSearch={handleSearch}
+          placeholderText="Search Producer" 
+        />
+
+        <Table bsPrefix="table custom-table" size='sm' borderless hover 
+          className="react-bootstrap-table" id="dataTable">
           <thead>
             <tr>
               <th>ID</th>
