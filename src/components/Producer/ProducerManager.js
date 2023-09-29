@@ -47,6 +47,7 @@ function ProducerManager() {
 
   const handleAdd = (e) => {
     e.preventDefault();
+    console.log("Botão New foi clicado!");
     setAddModalShow(true);
   };
 
@@ -94,6 +95,7 @@ function ProducerManager() {
           setSearchQuery={setSearchQuery}
           showAll={showAll}
           handleShowAll={handleShowAllProducers}
+          modalType="addProducer"
           handleAdd={handleAdd}
           addModalShow={addModalShow}
           setIsUpdated={setIsUpdated}

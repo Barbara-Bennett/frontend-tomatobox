@@ -1,6 +1,7 @@
 import React from "react";
-import { Form, InputGroup, Button, ButtonToolbar } from "react-bootstrap";
-import AddProducerModal from "../components/Producer/AddProducerModal";
+import { Form, InputGroup, ButtonToolbar } from "react-bootstrap";
+import { ShowAllButton, AddButton } from "./buttonHelpers";
+import { getModalByType } from "./addModalHelpers";
 
 function splitFullName(fullName) {
   if (!fullName) {
@@ -41,16 +42,17 @@ function handleSearchOnChange(
       let fullName = "";
 
       if (transformedItem.first_name) {
-        fullName = `${transformedItem.first_name} ${transformedItem.last_name} 
-        ${transformedItem.first_name}`.toLowerCase();
+        fullName =
+          `${transformedItem.first_name} ${transformedItem.last_name} ${transformedItem.first_name} 
+        `.toLowerCase();
       } else if (transformedItem.merchant_name) {
         const nameSplit = splitFullName(transformedItem.merchant_name);
         fullName =
           `${nameSplit.firstName} ${nameSplit.lastName} ${nameSplit.firstName}`.toLowerCase();
       } else if (transformedItem.producer_name) {
         const nameSplit = splitFullName(transformedItem.producer_name);
-        fullName =
-          `${nameSplit.firstName} ${nameSplit.lastName} ${nameSplit.firstName}`.toLowerCase();
+        fullName = `${nameSplit.firstName} ${nameSplit.lastName} 
+          ${nameSplit.firstName}`.toLowerCase();
       }
 
       return searchKeywords.some((keyword) => fullName.includes(keyword));
@@ -76,6 +78,7 @@ function SearchBar({
   setSearchQuery,
   showAll,
   handleShowAll,
+  modalType,
   handleAdd,
   addModalShow,
   AddModelClose,
@@ -96,29 +99,17 @@ function SearchBar({
 
       <ButtonToolbar>
         {!showAll && (
-          <Button
-            variant="outline-secondary"
-            onClick={handleShowAll}
-            className="btn-show-all btn-form"
-          >
-            Show All
-          </Button>
+          <ShowAllButton showAll={showAll} handleShowAll={handleShowAll} />
         )}
       </ButtonToolbar>
 
       <ButtonToolbar>
-        <Button
-          variant="success"
-          onClick={handleAdd}
-          className="btn-add btn-form"
-        >
-          + NEW
-        </Button>
-        <AddProducerModal
-          show={addModalShow}
-          setIsUpdated={setIsUpdated}
-          onHide={AddModelClose}
-        ></AddProducerModal>
+        <AddButton onClick={handleAdd} />
+        {getModalByType(modalType, {
+          show: addModalShow,
+          setIsUpdated,
+          onHide: AddModelClose,
+        })}
       </ButtonToolbar>
     </InputGroup>
   );

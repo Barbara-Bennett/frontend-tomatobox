@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { InputGroup } from 'react-bootstrap';
-import { Table } from 'react-bootstrap';
-import { Button, ButtonToolbar } from 'react-bootstrap';
-import { FaEdit } from 'react-icons/fa';
-import { RiDeleteBin5Line } from 'react-icons/ri';
-import { getMerchantsTransactions, deleteMerchantTransaction } from '../../services/MerchantTransactionService';
-import AddMerchantTransactionModal from "./AddMerchantTransactionModal";
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import {
+  getMerchantsTransactions,
+  deleteMerchantTransaction,
+} from "../../services/MerchantTransactionService";
 import UpdateMerchantTransactionModal from "./UpdateMerchantTransactionModal";
 import "../../App.css";
-import { handleSearchOnChange, handleShowAll, SearchInputGroup } from "../../helpers/searchHelpers";
+import {
+  handleSearchOnChange,
+  handleShowAll,
+  SearchBar,
+} from "../../helpers/searchHelpers";
 
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 function MerchantTransactionManager() {
-  const [originalMerchantsTransactions, setOriginalMerchantsTransactions] = useState([]);
+  const [originalMerchantsTransactions, setOriginalMerchantsTransactions] =
+    useState([]);
   const [merchantsTransactions, setMerchantsTransactions] = useState([]);
   const [addModalShow, setAddModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
@@ -30,14 +35,14 @@ function MerchantTransactionManager() {
     }
 
     getMerchantsTransactions()
-      .then(data => {
+      .then((data) => {
         if (mounted) {
           setOriginalMerchantsTransactions(data);
           setMerchantsTransactions(data);
         }
       })
-      .catch(error => {
-        console.error('Error fetching merchant transactions:', error);
+      .catch((error) => {
+        console.error("Error fetching merchant transactions:", error);
       });
 
     return () => {
@@ -59,49 +64,60 @@ function MerchantTransactionManager() {
 
   const handleSearch = (e) => {
     handleSearchOnChange(
-      e.target.value, originalMerchantsTransactions, setSearchQuery,
-      setMerchantsTransactions, setShowAll, (item) => item 
+      e.target.value,
+      originalMerchantsTransactions,
+      setSearchQuery,
+      setMerchantsTransactions,
+      setShowAll,
+      (item) => item
     );
   };
-  
-  const handleShowAllTransactionMerchants = (e) => {
+
+  const handleShowAllMerchantsTransaction = (e) => {
     e.preventDefault();
     handleShowAll(
-      originalMerchantsTransactions, setMerchantsTransactions, setSearchQuery, setShowAll,
+      originalMerchantsTransactions,
+      setMerchantsTransactions,
+      setSearchQuery,
+      setShowAll
     );
   };
 
   const handleDelete = (e, merchantTransactionId) => {
-    if (window.confirm('Are you sure ?')) {
+    if (window.confirm("Are you sure ?")) {
       e.preventDefault();
-      deleteMerchantTransaction(merchantTransactionId)
-        .then((result) => {
+      deleteMerchantTransaction(merchantTransactionId).then(
+        (result) => {
           alert(result);
           setIsUpdated(true);
         },
         (error) => {
           alert("Failed to Delete MerchantTransaction");
-        });
+        }
+      );
     }
   };
-  
+
   const formatDate = (dateString) => {
     const dateObject = new Date(Date.parse(dateString));
 
     if (isNaN(dateObject)) {
-      const dateParts = dateString.split('-');
+      const dateParts = dateString.split("-");
       if (dateParts.length === 3) {
         const year = parseInt(dateParts[0]);
         const month = parseInt(dateParts[1]);
         const day = parseInt(dateParts[2]);
         if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
-          return `${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}/${year}`;
+          return `${String(month).padStart(2, "0")}/${String(day).padStart(
+            2,
+            "0"
+          )}/${year}`;
         }
       }
       return dateString;
     }
 
-    const formattedDate = format(dateObject, 'MM/dd/yyyy');
+    const formattedDate = format(dateObject, "MM/dd/yyyy");
     return formattedDate;
   };
 
@@ -111,33 +127,30 @@ function MerchantTransactionManager() {
   return (
     <div className="side-container manage-tab content">
       <div className="row side-row">
-
         <h1 className="title">MERCHANTS TRANSACTIONS</h1>
-        <InputGroup className='input-group'>
-          <Form.Control
-            className='input-search'
-            placeholder="Search Merchant Transaction"
-            aria-label="Recipient's username with two button addons"
-            value={searchQuery}
-            onChange={handleSearch}
-          />
-          <ButtonToolbar>
-            {!showAll && (
-              <Button variant="outline-secondary" onClick={handleShowAllTransactionMerchants} className="btn-show-all btn-form">
-                Show All
-              </Button>
-            )}
-          </ButtonToolbar>
-          <ButtonToolbar>
-            <Button variant="success" onClick={handleAdd} className="btn-add btn-form">
-              + NEW
-            </Button>
-            <AddMerchantTransactionModal show={addModalShow} setIsUpdated={setIsUpdated}
-              onHide={AddModelClose}></AddMerchantTransactionModal>
-          </ButtonToolbar>
-        </InputGroup>
 
-        <Table bsPrefix="table custom-table" size='sm' borderless hover className="react-bootstrap-table" id="dataTable">
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          showAll={showAll}
+          handleShowAll={handleShowAllMerchantsTransaction}
+          modalType="addMerchantTransaction"
+          handleAdd={handleAdd}
+          addModalShow={addModalShow}
+          setIsUpdated={setIsUpdated}
+          AddModelClose={AddModelClose}
+          handleSearch={handleSearch}
+          placeholderText="Search Merchant Transaction"
+        />
+
+        <Table
+          bsPrefix="table custom-table"
+          size="sm"
+          borderless
+          hover
+          className="react-bootstrap-table"
+          id="dataTable"
+        >
           <thead>
             <tr>
               <th>ID</th>
@@ -151,39 +164,51 @@ function MerchantTransactionManager() {
             </tr>
           </thead>
           <tbody>
-            {merchantsTransactions.length > 0
-              ? merchantsTransactions.map((merTra) => (
+            {merchantsTransactions.length > 0 ? (
+              merchantsTransactions.map((merTra) => (
                 <tr key={merTra.merchantTransactionId}>
                   <td>{merTra.merchantTransactionId}</td>
                   <td>{merTra.merchant_name}</td>
-                  <td>{formatDate(merTra.date)}</td> 
+                  <td>{formatDate(merTra.date)}</td>
                   <td>{merTra.transaction_type}</td>
                   <td>{merTra.box_type}</td>
                   <td>{merTra.box_qtt}</td>
                   <td>${merTra.price}</td>
-                  <td style={{ display: 'none' }}>{merTra.merchant}</td>
+                  <td style={{ display: "none" }}>{merTra.merchant}</td>
                   <td>
-
-                    <Button className="mr-2" variant="danger"
-                      onClick={event => handleDelete(event, merTra.merchantTransactionId)}>
+                    <Button
+                      className="mr-2"
+                      variant="danger"
+                      onClick={(event) =>
+                        handleDelete(event, merTra.merchantTransactionId)
+                      }
+                    >
                       <RiDeleteBin5Line />
                     </Button>
 
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <Button className="mr-2"
-                      onClick={event => handleUpdate(event, merTra)}>
+                    <Button
+                      className="mr-2"
+                      onClick={(event) => handleUpdate(event, merTra)}
+                    >
                       <FaEdit />
                     </Button>
-                    <UpdateMerchantTransactionModal show={editModalShow} merchantTransaction={editMerchantTransaction} setIsUpdated={setIsUpdated}
-                      onHide={EditModelClose}></UpdateMerchantTransactionModal>
+                    <UpdateMerchantTransactionModal
+                      show={editModalShow}
+                      merchantTransaction={editMerchantTransaction}
+                      setIsUpdated={setIsUpdated}
+                      onHide={EditModelClose}
+                    ></UpdateMerchantTransactionModal>
                   </td>
                 </tr>
               ))
-              : <tr><td colSpan="8">No Merchants Transactions found.</td></tr>
-            }
+            ) : (
+              <tr>
+                <td colSpan="8">No Merchants Transactions found.</td>
+              </tr>
+            )}
           </tbody>
         </Table>
-        
       </div>
     </div>
   );
