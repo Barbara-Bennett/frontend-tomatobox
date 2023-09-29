@@ -1,13 +1,13 @@
-import { React, useEffect, useState } from 'react';
-import { Table, Button } from 'react-bootstrap';
-import { FaEdit } from 'react-icons/fa';
-import { RiDeleteBin5Line } from 'react-icons/ri';
-import { getProducers, deleteProducer } from '../../services/ProducerService';
-import { 
-  handleSearchOnChange, 
-  handleShowAll, 
-  SearchBar 
-  } from "../../helpers/searchHelpers";
+import { React, useEffect, useState } from "react";
+import { Table, Button } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { getProducers, deleteProducer } from "../../services/ProducerService";
+import {
+  handleSearchOnChange,
+  handleShowAll,
+  SearchBar,
+} from "../../helpers/searchHelpers";
 import UpdateProducerModal from "./UpdateProducerModal";
 import "../../App.css";
 
@@ -26,13 +26,12 @@ function ProducerManager() {
     if (producers.length && !isUpdated) {
       return;
     }
-    getProducers()
-      .then(data => {
-        if (mounted) {
-          setOriginalProducers(data);
-          setProducers(data);
-        }
-      });
+    getProducers().then((data) => {
+      if (mounted) {
+        setOriginalProducers(data);
+        setProducers(data);
+      }
+    });
 
     return () => {
       mounted = false;
@@ -52,30 +51,33 @@ function ProducerManager() {
   };
 
   const handleSearch = (e) => {
-  handleSearchOnChange(
-    e.target.value, originalProducers, setSearchQuery, setProducers, 
-    setShowAll, (item) => item 
-  );
-};
+    handleSearchOnChange(
+      e.target.value,
+      originalProducers,
+      setSearchQuery,
+      setProducers,
+      setShowAll,
+      (item) => item
+    );
+  };
 
-const handleShowAllProducers = (e) => {
-  e.preventDefault();
-  handleShowAll(
-    originalProducers, setProducers, setSearchQuery, setShowAll,
-  );
-};
+  const handleShowAllProducers = (e) => {
+    e.preventDefault();
+    handleShowAll(originalProducers, setProducers, setSearchQuery, setShowAll);
+  };
 
   const handleDelete = (e, producerId) => {
-    if (window.confirm('Are you sure ?')) {
+    if (window.confirm("Are you sure ?")) {
       e.preventDefault();
-      deleteProducer(producerId)
-        .then((result) => {
+      deleteProducer(producerId).then(
+        (result) => {
           alert(result);
           setIsUpdated(true);
         },
         (error) => {
           alert("Failed to Delete Producer");
-        });
+        }
+      );
     }
   };
 
@@ -97,11 +99,17 @@ const handleShowAllProducers = (e) => {
           setIsUpdated={setIsUpdated}
           AddModelClose={AddModelClose}
           handleSearch={handleSearch}
-          placeholderText="Search Producer" 
+          placeholderText="Search Producer"
         />
 
-        <Table bsPrefix="table custom-table" size='sm' borderless hover 
-          className="react-bootstrap-table" id="dataTable">
+        <Table
+          bsPrefix="table custom-table"
+          size="sm"
+          borderless
+          hover
+          className="react-bootstrap-table"
+          id="dataTable"
+        >
           <thead>
             <tr>
               <th>ID</th>
@@ -117,8 +125,8 @@ const handleShowAllProducers = (e) => {
             </tr>
           </thead>
           <tbody>
-            {producers.length > 0
-              ? producers.map((pro) => (
+            {producers.length > 0 ? (
+              producers.map((pro) => (
                 <tr key={pro.producerId}>
                   <td>{pro.producerId}</td>
                   <td className="custom-td">{pro.first_name}</td>
@@ -130,22 +138,34 @@ const handleShowAllProducers = (e) => {
                   <td>{pro.box_premium}</td>
                   <td>{pro.box_common}</td>
                   <td>
-                    <Button className="mr-2" variant="danger"
-                      onClick={event => handleDelete(event, pro.producerId)}>
+                    <Button
+                      className="mr-2"
+                      variant="danger"
+                      onClick={(event) => handleDelete(event, pro.producerId)}
+                    >
                       <RiDeleteBin5Line />
                     </Button>
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <Button className="mr-2"
-                      onClick={event => handleUpdate(event, pro)}>
+                    <Button
+                      className="mr-2"
+                      onClick={(event) => handleUpdate(event, pro)}
+                    >
                       <FaEdit />
                     </Button>
-                    <UpdateProducerModal show={editModalShow} producer={editProducer} setIsUpdated={setIsUpdated}
-                      onHide={EditModelClose}></UpdateProducerModal>
+                    <UpdateProducerModal
+                      show={editModalShow}
+                      producer={editProducer}
+                      setIsUpdated={setIsUpdated}
+                      onHide={EditModelClose}
+                    ></UpdateProducerModal>
                   </td>
                 </tr>
               ))
-              : <tr><td colSpan="8">No producers found.</td></tr>
-            }
+            ) : (
+              <tr>
+                <td colSpan="8">No producers found.</td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </div>
