@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { InputGroup } from 'react-bootstrap';
-import { Table } from 'react-bootstrap';
-import { Button, ButtonToolbar } from 'react-bootstrap';
-import { FaEdit } from 'react-icons/fa';
-import { RiDeleteBin5Line } from 'react-icons/ri';
-import { getProducersTransactions, deleteProducerTransaction } from '../../services/ProducerTransactionService';
-import AddProducerTransactionModal from "./AddProducerTransactionModal";
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import {
+  getProducersTransactions,
+  deleteProducerTransaction,
+} from "../../services/ProducerTransactionService";
 import UpdateProducerTransactionModal from "./UpdateProducerTransactionModal";
+import {
+  handleSearchOnChange,
+  handleShowAll,
+  SearchBar,
+} from "../../helpers/searchHelpers";
 import "../../App.css";
-
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 function ProducerTransactionManager() {
-  const [originalProducersTransactions, setOriginalProducersTransactions] = useState([]);
+  const [originalProducersTransactions, setOriginalProducersTransactions] =
+    useState([]);
   const [producersTransactions, setProducersTransactions] = useState([]);
   const [addModalShow, setAddModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
@@ -29,14 +34,14 @@ function ProducerTransactionManager() {
     }
 
     getProducersTransactions()
-      .then(data => {
+      .then((data) => {
         if (mounted) {
           setOriginalProducersTransactions(data);
           setProducersTransactions(data);
         }
       })
-      .catch(error => {
-        console.error('Error fetching producer transactions:', error);
+      .catch((error) => {
+        console.error("Error fetching producer transactions:", error);
       });
 
     return () => {
@@ -56,61 +61,62 @@ function ProducerTransactionManager() {
     setAddModalShow(true);
   };
 
-  const handleSearchOnChange = (e) => {
-    const value = e.target.value;
-    setSearchQuery(value);
-    if (value.trim() === "") {
-      setProducersTransactions(originalProducersTransactions);
-      setShowAll(true);
-    } else {
-      const searchKeywords = value.toLowerCase().split(" ");
-      const filteredProducersTransactions = originalProducersTransactions.filter((proTra) => {
-        const fullName = `${proTra.producer_name}`.toLowerCase();
-        return searchKeywords.some(keyword => fullName.includes(keyword));
-      });
-      setProducersTransactions(filteredProducersTransactions);
-      setShowAll(false);
-    }
+  const handleSearch = (e) => {
+    handleSearchOnChange(
+      e.target.value,
+      originalProducersTransactions,
+      setSearchQuery,
+      setProducersTransactions,
+      setShowAll,
+      (item) => item
+    );
   };
 
-  const handleShowAll = (e) => {
+  const handleShowAllProducersTransactions = (e) => {
     e.preventDefault();
-    setProducersTransactions(originalProducersTransactions);
-    setSearchQuery("");
-    setShowAll(true);
+    handleShowAll(
+      originalProducersTransactions,
+      setProducersTransactions,
+      setSearchQuery,
+      setShowAll
+    );
   };
 
   const handleDelete = (e, producerTransactionId) => {
-    if (window.confirm('Are you sure ?')) {
+    if (window.confirm("Are you sure ?")) {
       e.preventDefault();
-      deleteProducerTransaction(producerTransactionId)
-        .then((result) => {
+      deleteProducerTransaction(producerTransactionId).then(
+        (result) => {
           alert(result);
           setIsUpdated(true);
         },
         (error) => {
           alert("Failed to Delete ProducerTransaction");
-        });
+        }
+      );
     }
   };
-  
+
   const formatDate = (dateString) => {
     const dateObject = new Date(Date.parse(dateString));
 
     if (isNaN(dateObject)) {
-      const dateParts = dateString.split('-');
+      const dateParts = dateString.split("-");
       if (dateParts.length === 3) {
         const year = parseInt(dateParts[0]);
         const month = parseInt(dateParts[1]);
         const day = parseInt(dateParts[2]);
         if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
-          return `${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}/${year}`;
+          return `${String(month).padStart(2, "0")}/${String(day).padStart(
+            2,
+            "0"
+          )}/${year}`;
         }
       }
       return dateString;
     }
 
-    const formattedDate = format(dateObject, 'MM/dd/yyyy');
+    const formattedDate = format(dateObject, "MM/dd/yyyy");
     return formattedDate;
   };
 
@@ -120,36 +126,33 @@ function ProducerTransactionManager() {
   return (
     <div className="side-container manage-tab content">
       <div className="row side-row">
-
         <h1 className="title">PRODUCERS TRANSACTIONS</h1>
-        <InputGroup className='input-group'>
-          <Form.Control
-            className='input-search'
-            placeholder="Search ProducerTransaction"
-            aria-label="Recipient's username with two button addons"
-            value={searchQuery}
-            onChange={handleSearchOnChange}
-          />
-          <ButtonToolbar>
-            {!showAll && (
-              <Button variant="outline-secondary" onClick={handleShowAll} className="btn-show-all btn-form">
-                Show All
-              </Button>
-            )}
-          </ButtonToolbar>
-          <ButtonToolbar>
-            <Button variant="success" onClick={handleAdd} className="btn-add btn-form">
-              + NEW
-            </Button>
-            <AddProducerTransactionModal show={addModalShow} setIsUpdated={setIsUpdated}
-              onHide={AddModelClose}></AddProducerTransactionModal>
-          </ButtonToolbar>
-        </InputGroup>
 
-        <Table bsPrefix="table custom-table" size='sm' borderless hover className="react-bootstrap-table" id="dataTable">
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          showAll={showAll}
+          handleShowAll={handleShowAllProducersTransactions}
+          modalType="addProducerTransaction"
+          handleAdd={handleAdd}
+          addModalShow={addModalShow}
+          setIsUpdated={setIsUpdated}
+          AddModelClose={AddModelClose}
+          handleSearch={handleSearch}
+          placeholderText="Search Producers Transaction"
+        />
+
+        <Table
+          bsPrefix="table custom-table"
+          size="sm"
+          borderless
+          hover
+          className="react-bootstrap-table"
+          id="dataTable"
+        >
           <thead>
             <tr>
-            <th>ID</th>
+              <th>ID</th>
               <th>Name</th>
               <th>Date</th>
               <th>Transaction</th>
@@ -160,39 +163,51 @@ function ProducerTransactionManager() {
             </tr>
           </thead>
           <tbody>
-            {producersTransactions.length > 0
-              ? producersTransactions.map((proTra) => (
+            {producersTransactions.length > 0 ? (
+              producersTransactions.map((proTra) => (
                 <tr key={proTra.producerTransactionId}>
                   <td>{proTra.producerTransactionId}</td>
                   <td>{proTra.producer_name}</td>
-                  <td>{formatDate(proTra.date)}</td> 
+                  <td>{formatDate(proTra.date)}</td>
                   <td>{proTra.transaction_type}</td>
                   <td>{proTra.box_type}</td>
                   <td>{proTra.box_qtt}</td>
                   <td>${proTra.price}</td>
-                  <td style={{ display: 'none' }}>{proTra.producer}</td>
+                  <td style={{ display: "none" }}>{proTra.producer}</td>
                   <td>
-
-                    <Button className="mr-2" variant="danger"
-                      onClick={event => handleDelete(event, proTra.producerTransactionId)}>
+                    <Button
+                      className="mr-2"
+                      variant="danger"
+                      onClick={(event) =>
+                        handleDelete(event, proTra.producerTransactionId)
+                      }
+                    >
                       <RiDeleteBin5Line />
                     </Button>
 
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <Button className="mr-2"
-                      onClick={event => handleUpdate(event, proTra)}>
+                    <Button
+                      className="mr-2"
+                      onClick={(event) => handleUpdate(event, proTra)}
+                    >
                       <FaEdit />
                     </Button>
-                    <UpdateProducerTransactionModal show={editModalShow} producerTransaction={editProducerTransaction} setIsUpdated={setIsUpdated}
-                      onHide={EditModelClose}></UpdateProducerTransactionModal>
+                    <UpdateProducerTransactionModal
+                      show={editModalShow}
+                      producerTransaction={editProducerTransaction}
+                      setIsUpdated={setIsUpdated}
+                      onHide={EditModelClose}
+                    ></UpdateProducerTransactionModal>
                   </td>
                 </tr>
               ))
-              : <tr><td colSpan="8">No Producers Transactions found.</td></tr>
-            }
+            ) : (
+              <tr>
+                <td colSpan="8">No Producers Transactions found.</td>
+              </tr>
+            )}
           </tbody>
         </Table>
-        
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, InputGroup, ButtonToolbar } from "react-bootstrap";
 import { ShowAllButton, AddButton } from "./buttonHelpers";
-import { getModalByType } from "./addModalHelpers";
+import { getAddModalByType } from "./modalHelpers";
 
 function splitFullName(fullName) {
   if (!fullName) {
@@ -51,8 +51,8 @@ function handleSearchOnChange(
           `${nameSplit.firstName} ${nameSplit.lastName} ${nameSplit.firstName}`.toLowerCase();
       } else if (transformedItem.producer_name) {
         const nameSplit = splitFullName(transformedItem.producer_name);
-        fullName = `${nameSplit.firstName} ${nameSplit.lastName} 
-          ${nameSplit.firstName}`.toLowerCase();
+        fullName =
+          `${nameSplit.firstName} ${nameSplit.lastName} ${nameSplit.firstName}`.toLowerCase();
       }
 
       return searchKeywords.some((keyword) => fullName.includes(keyword));
@@ -105,7 +105,7 @@ function SearchBar({
 
       <ButtonToolbar>
         <AddButton onClick={handleAdd} />
-        {getModalByType(modalType, {
+        {getAddModalByType(modalType, {
           show: addModalShow,
           setIsUpdated,
           onHide: AddModelClose,

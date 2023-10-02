@@ -1,18 +1,15 @@
 import React from "react";
-import AddNewBoxModal from "../components/Box/AddNewBoxModal";
 import AddMerchantModal from "../components/Merchant/AddMerchantModal";
 import AddMerchantTransactionModal from "../components/MerchantTransaction/AddMerchantTransactionModal";
 import AddProducerModal from "../components/Producer/AddProducerModal";
-import AddProducerTransactionModal from "../components/ProducerTransactionModal/AddProducerTransactionModal";
+import AddProducerTransactionModal from "../components/ProducerTransaction/AddProducerTransactionModal";
 
-function getModalByType(modalType, props) {
+function getAddModalByType(modalType, props) {
   switch (modalType) {
-    case "addBox":
-      return <AddNewBoxModal {...props} />;
-    case "addMerchantTransaction":
-      return <AddMerchantTransactionModal {...props} />;
     case "addMerchant":
       return <AddMerchantModal {...props} />;
+    case "addMerchantTransaction":
+      return <AddMerchantTransactionModal {...props} />;
     case "addProducer":
       return <AddProducerModal {...props} />;
     case "addProducerTransaction":
@@ -23,4 +20,4 @@ function getModalByType(modalType, props) {
   }
 }
 
-export { getModalByType };
+export { getAddModalByType };

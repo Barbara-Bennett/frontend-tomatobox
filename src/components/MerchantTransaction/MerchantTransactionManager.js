@@ -14,7 +14,6 @@ import {
   handleShowAll,
   SearchBar,
 } from "../../helpers/searchHelpers";
-
 import { format } from "date-fns";
 
 function MerchantTransactionManager() {
