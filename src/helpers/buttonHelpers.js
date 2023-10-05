@@ -1,5 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 function ShowAllButton({ showAll, handleShowAll }) {
   return (
@@ -21,4 +23,30 @@ function AddButton({ onClick }) {
   );
 }
 
-export { ShowAllButton, AddButton };
+const handleDelete = (itemId, deleteFunction, setIsUpdated) => {
+  if (window.confirm("Are you sure?")) {
+    deleteFunction(itemId)
+      .then((result) => {
+        alert(result);
+        setIsUpdated(true);
+      })
+      .catch((error) => {
+        alert("Failed to Delete Item");
+      });
+  }
+};
+
+const DeleteButton = ({ onClick }) => {
+  const handleClick = (event) => {
+    onClick(event);
+  };
+
+  return (
+    <Button className="mr-2" variant="danger" onClick={handleClick}>
+      <RiDeleteBin5Line />
+    </Button>
+  );
+};
+
+
+export { ShowAllButton, AddButton, handleDelete, DeleteButton };

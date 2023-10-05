@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { getMerchants, deleteMerchant } from "../../services/MerchantService";
 import {
   handleSearchOnChange,
@@ -10,6 +9,8 @@ import {
   SearchBar,
 } from "../../helpers/searchHelpers";
 import UpdateMerchantModal from "./UpdateMerchantModal";
+import { handleDelete, DeleteButton } from "../../helpers/buttonHelpers";
+
 import "../../App.css";
 
 function MerchantManager() {
@@ -67,19 +68,8 @@ function MerchantManager() {
     handleShowAll(originalMerchants, setMerchants, setSearchQuery, setShowAll);
   };
 
-  const handleDelete = (e, merchantId) => {
-    if (window.confirm("Are you sure ?")) {
-      e.preventDefault();
-      deleteMerchant(merchantId).then(
-        (result) => {
-          alert(result);
-          setIsUpdated(true);
-        },
-        (error) => {
-          alert("Failed to Delete Merchant");
-        }
-      );
-    }
+  const handleDeleteMerchant = (e, merchantId) => {
+    handleDelete(merchantId, deleteMerchant, setIsUpdated); // Chame a função genérica
   };
 
   let AddModelClose = () => setAddModalShow(false);
@@ -140,15 +130,14 @@ function MerchantManager() {
                   <td>{merchant.box_premium}</td>
                   <td>{merchant.box_common}</td>
                   <td>
-                    <Button
-                      className="mr-2"
-                      variant="danger"
+
+                    <DeleteButton
+                      label="Delete"
                       onClick={(event) =>
-                        handleDelete(event, merchant.merchantId)
+                        handleDeleteMerchant(event, merchant.merchantId)
                       }
-                    >
-                      <RiDeleteBin5Line />
-                    </Button>
+                    />
+
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <Button
                       className="mr-2"
