@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import {
   getProducersTransactions,
   deleteProducerTransaction,
@@ -13,6 +12,7 @@ import {
   handleShowAll,
   SearchBar,
 } from "../../helpers/searchHelpers";
+import { handleDelete, DeleteButton } from "../../helpers/buttonHelpers";
 import "../../App.css";
 import { format } from "date-fns";
 
@@ -82,19 +82,12 @@ function ProducerTransactionManager() {
     );
   };
 
-  const handleDelete = (e, producerTransactionId) => {
-    if (window.confirm("Are you sure ?")) {
-      e.preventDefault();
-      deleteProducerTransaction(producerTransactionId).then(
-        (result) => {
-          alert(result);
-          setIsUpdated(true);
-        },
-        (error) => {
-          alert("Failed to Delete ProducerTransaction");
-        }
-      );
-    }
+  const handleDeleteProducerTransaction = (e, producerTransactionId) => {
+    handleDelete(
+      producerTransactionId,
+      deleteProducerTransaction,
+      setIsUpdated
+    );
   };
 
   const formatDate = (dateString) => {
@@ -175,15 +168,14 @@ function ProducerTransactionManager() {
                   <td>${proTra.price}</td>
                   <td style={{ display: "none" }}>{proTra.producer}</td>
                   <td>
-                    <Button
-                      className="mr-2"
-                      variant="danger"
+                    <DeleteButton
                       onClick={(event) =>
-                        handleDelete(event, proTra.producerTransactionId)
+                        handleDeleteProducerTransaction(
+                          event,
+                          proTra.producerTransactionId
+                        )
                       }
-                    >
-                      <RiDeleteBin5Line />
-                    </Button>
+                    />
 
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <Button

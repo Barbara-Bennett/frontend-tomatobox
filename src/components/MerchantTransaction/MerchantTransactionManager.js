@@ -14,6 +14,7 @@ import {
   handleShowAll,
   SearchBar,
 } from "../../helpers/searchHelpers";
+import { handleDelete, DeleteButton } from "../../helpers/buttonHelpers";
 import { format } from "date-fns";
 
 function MerchantTransactionManager() {
@@ -82,19 +83,12 @@ function MerchantTransactionManager() {
     );
   };
 
-  const handleDelete = (e, merchantTransactionId) => {
-    if (window.confirm("Are you sure ?")) {
-      e.preventDefault();
-      deleteMerchantTransaction(merchantTransactionId).then(
-        (result) => {
-          alert(result);
-          setIsUpdated(true);
-        },
-        (error) => {
-          alert("Failed to Delete MerchantTransaction");
-        }
-      );
-    }
+  const handleDeleteMerchantTransaction = (e, merchantTransactionId) => {
+    handleDelete(
+      merchantTransactionId,
+      deleteMerchantTransaction,
+      setIsUpdated
+    );
   };
 
   const formatDate = (dateString) => {
@@ -175,15 +169,14 @@ function MerchantTransactionManager() {
                   <td>${merTra.price}</td>
                   <td style={{ display: "none" }}>{merTra.merchant}</td>
                   <td>
-                    <Button
-                      className="mr-2"
-                      variant="danger"
+                    <DeleteButton
                       onClick={(event) =>
-                        handleDelete(event, merTra.merchantTransactionId)
+                        handleDeleteMerchantTransaction(
+                          event,
+                          merTra.merchantTransactionId
+                        )
                       }
-                    >
-                      <RiDeleteBin5Line />
-                    </Button>
+                    />
 
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <Button

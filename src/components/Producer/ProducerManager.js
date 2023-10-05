@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { getProducers, deleteProducer } from "../../services/ProducerService";
 import {
   handleSearchOnChange,
@@ -9,6 +8,7 @@ import {
   SearchBar,
 } from "../../helpers/searchHelpers";
 import UpdateProducerModal from "./UpdateProducerModal";
+import { handleDelete, DeleteButton } from "../../helpers/buttonHelpers";
 import "../../App.css";
 
 function ProducerManager() {
@@ -67,19 +67,8 @@ function ProducerManager() {
     handleShowAll(originalProducers, setProducers, setSearchQuery, setShowAll);
   };
 
-  const handleDelete = (e, producerId) => {
-    if (window.confirm("Are you sure ?")) {
-      e.preventDefault();
-      deleteProducer(producerId).then(
-        (result) => {
-          alert(result);
-          setIsUpdated(true);
-        },
-        (error) => {
-          alert("Failed to Delete Producer");
-        }
-      );
-    }
+  const handleDeleteProducer = (e, producerId) => {
+    handleDelete(producerId, deleteProducer, setIsUpdated);
   };
 
   let AddModelClose = () => setAddModalShow(false);
@@ -140,13 +129,11 @@ function ProducerManager() {
                   <td>{pro.box_premium}</td>
                   <td>{pro.box_common}</td>
                   <td>
-                    <Button
-                      className="mr-2"
-                      variant="danger"
-                      onClick={(event) => handleDelete(event, pro.producerId)}
-                    >
-                      <RiDeleteBin5Line />
-                    </Button>
+                    <DeleteButton
+                      onClick={(event) =>
+                        handleDeleteProducer(event, producers.producerId)
+                      }
+                    />
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <Button
                       className="mr-2"

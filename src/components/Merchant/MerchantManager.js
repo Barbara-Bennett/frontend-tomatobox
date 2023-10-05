@@ -69,7 +69,7 @@ function MerchantManager() {
   };
 
   const handleDeleteMerchant = (e, merchantId) => {
-    handleDelete(merchantId, deleteMerchant, setIsUpdated); // Chame a função genérica
+    handleDelete(merchantId, deleteMerchant, setIsUpdated);
   };
 
   let AddModelClose = () => setAddModalShow(false);
@@ -130,9 +130,7 @@ function MerchantManager() {
                   <td>{merchant.box_premium}</td>
                   <td>{merchant.box_common}</td>
                   <td>
-
                     <DeleteButton
-                      label="Delete"
                       onClick={(event) =>
                         handleDeleteMerchant(event, merchant.merchantId)
                       }
