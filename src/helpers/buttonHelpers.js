@@ -2,8 +2,9 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { getUpdateModalByType } from "./modalHelpers";
 
-function ShowAllButton({ showAll, handleShowAll }) {
+const ShowAllButton = ({ showAll, handleShowAll }) => {
   return (
     <Button
       variant="outline-secondary"
@@ -13,15 +14,15 @@ function ShowAllButton({ showAll, handleShowAll }) {
       Show All
     </Button>
   );
-}
+};
 
-function AddButton({ onClick }) {
+const AddButton = ({ onClick }) => {
   return (
     <Button variant="success" onClick={onClick} className="btn-add btn-form">
       + NEW
     </Button>
   );
-}
+};
 
 const handleDelete = (itemId, deleteFunction, setIsUpdated) => {
   if (window.confirm("Are you sure?")) {
@@ -48,5 +49,31 @@ const DeleteButton = ({ onClick }) => {
   );
 };
 
+const UpdateButton = ({
+  onClick,
+  modalType,
+  editModalShow,
+  setIsUpdated,
+  EditModelClose,
+}) => {
+  const handleClick = (event) => {
+    onClick(event);
+  };
 
-export { ShowAllButton, AddButton, handleDelete, DeleteButton };
+  const updateModal = getUpdateModalByType(modalType, {
+    show: editModalShow,
+    setIsUpdated,
+    onHide: EditModelClose,
+  });
+
+  return (
+    <div>
+      <Button className="mr-2" onClick={handleClick}>
+        <FaEdit />
+      </Button>
+      {updateModal}
+    </div>
+  );
+};
+
+export { ShowAllButton, AddButton, handleDelete, DeleteButton, UpdateButton };

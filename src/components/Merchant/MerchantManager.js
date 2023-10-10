@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { FaEdit } from "react-icons/fa";
 import { getMerchants, deleteMerchant } from "../../services/MerchantService";
 import {
   handleSearchOnChange,
   handleShowAll,
   SearchBar,
 } from "../../helpers/searchHelpers";
-import UpdateMerchantModal from "./UpdateMerchantModal";
-import { handleDelete, DeleteButton } from "../../helpers/buttonHelpers";
-
+import {
+  handleDelete,
+  DeleteButton,
+  UpdateButton,
+} from "../../helpers/buttonHelpers";
 import "../../App.css";
 
 function MerchantManager() {
@@ -135,20 +135,15 @@ function MerchantManager() {
                         handleDeleteMerchant(event, merchant.merchantId)
                       }
                     />
-
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <Button
-                      className="mr-2"
-                      onClick={(event) => handleUpdate(event, merchant)}
-                    >
-                      <FaEdit />
-                    </Button>
-                    <UpdateMerchantModal
-                      show={editModalShow}
-                      merchant={editMerchant}
+
+                    <UpdateButton
+                      onClick={handleUpdate}
+                      modalType="updateMerchant"
+                      editModalShow={editModalShow}
                       setIsUpdated={setIsUpdated}
-                      onHide={EditModelClose}
-                    ></UpdateMerchantModal>
+                      EditModelClose={EditModelClose}
+                    />
                   </td>
                 </tr>
               ))

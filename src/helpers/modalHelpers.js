@@ -3,8 +3,10 @@ import AddMerchantModal from "../components/Merchant/AddMerchantModal";
 import AddMerchantTransactionModal from "../components/MerchantTransaction/AddMerchantTransactionModal";
 import AddProducerModal from "../components/Producer/AddProducerModal";
 import AddProducerTransactionModal from "../components/ProducerTransaction/AddProducerTransactionModal";
+import UpdateMerchantModal from "../components/Merchant/UpdateMerchantModal";
 
-function getAddModalByType(modalType, props) {
+
+const getAddModalByType = (modalType, props) => {
   switch (modalType) {
     case "addMerchant":
       return <AddMerchantModal {...props} />;
@@ -20,4 +22,14 @@ function getAddModalByType(modalType, props) {
   }
 }
 
-export { getAddModalByType };
+const getUpdateModalByType = (modalType, props) => {
+  switch (modalType) {
+    case "updateMerchant":
+      return <UpdateMerchantModal {...props} />
+
+    default:
+      return null;
+  }
+}
+
+export { getAddModalByType,  getUpdateModalByType};
