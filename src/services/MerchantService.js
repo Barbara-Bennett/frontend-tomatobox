@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 export function getMerchants() {
-  return axios.get('https://tomatobox-backend-4j2l.onrender.com/merchants/')
+  return axios.get('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/merchants/')
     .then(response => response.data);
 }
 
 export function getMerchant(merchantId) {
-  return axios.get('https://tomatobox-backend-4j2l.onrender.com/merchants/' + merchantId + '/')
+  return axios.get('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/merchants/' + merchantId + '/')
     .then(response => response.data);
 }
 
 export function deleteMerchant(merchantId) {
-  return axios.delete('https://tomatobox-backend-4j2l.onrender.com/merchants/' + merchantId + '/', {
+  return axios.delete('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/merchants/' + merchantId + '/', {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -22,7 +22,7 @@ export function deleteMerchant(merchantId) {
 }
 
 export function addMerchant(merchant) {
-  return axios.post('https://tomatobox-backend-4j2l.onrender.com/merchants/', {
+  return axios.post('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/merchants/', {
     merchantId: null,
     first_name: merchant.first_name.value,
     last_name: merchant.last_name.value,
@@ -62,6 +62,6 @@ export function updateMerchant(merchantId, merchant) {
     };
   }
   return axios
-    .put('https://tomatobox-backend-4j2l.onrender.com/merchants/' + merchantId + '/', updateMerchant)
+    .put('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/merchants/' + merchantId + '/', updateMerchant)
     .then(response => response.data);
 }

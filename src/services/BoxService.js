@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 export function getBoxes() {
-  return axios.get('https://tomatobox-backend-4j2l.onrender.com/boxes/')
+  return axios.get('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/boxes/')
     .then(response => response.data)
 }
 
 export function getBox(box_type) {
-  return axios.get('https://tomatobox-backend-4j2l.onrender.com/boxes/' + box_type + '/')
+  return axios.get('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/boxes/' + box_type + '/')
     .then(response => response.data)
 }
 
 export function deleteBox(box_type) {
-  return axios.delete('https://tomatobox-backend-4j2l.onrender.com/boxes/' + box_type + '/', {
+  return axios.delete('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/boxes/' + box_type + '/', {
   method: 'DELETE',
   headers: {
     'Accept':'application/json',
@@ -22,7 +22,7 @@ export function deleteBox(box_type) {
 }
 
 export function addBox(box){
-  return axios.post('https://tomatobox-backend-4j2l.onrender.com/boxes/', {
+  return axios.post('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/boxes/', {
     box_type:box.box_type.value,
     new_boxes:box.new_boxes.value,
     qtt_total:box.qtt_total.value,
@@ -61,7 +61,7 @@ export function addNewBox(box_type, box) {
   console.log({ addNewdBox });
   
   return axios
-    .put('https://tomatobox-backend-4j2l.onrender.com/boxes/' + box_type + '/', addNewdBox)
+    .put('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/boxes/' + box_type + '/', addNewdBox)
     .then((response) => response.data);
 }
 
@@ -92,6 +92,6 @@ export function damageBox(box_type, box) {
   console.log({ damageBox });
   
   return axios
-    .put('https://tomatobox-backend-4j2l.onrender.com/boxes/' + box_type + '/', damageBox)
+    .put('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/boxes/' + box_type + '/', damageBox)
     .then((response) => response.data);
 }

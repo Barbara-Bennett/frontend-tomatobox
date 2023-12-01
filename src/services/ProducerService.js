@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 export function getProducers() {
-  return axios.get('https://tomatobox-backend-4j2l.onrender.com/producers/')
+  return axios.get('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/producers/')
     .then(response => response.data)
 }
 
 export function getProducer(producerId) {
-  return axios.get('https://tomatobox-backend-4j2l.onrender.com/producers/' + producerId + '/')
+  return axios.get('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/producers/' + producerId + '/')
     .then(response => response.data)
 }
 
 
 export function deleteProducer(producerId) {
-  return axios.delete('https://tomatobox-backend-4j2l.onrender.com/producers/' + producerId + '/', {
+  return axios.delete('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/producers/' + producerId + '/', {
   method: 'DELETE',
   headers: {
     'Accept':'application/json',
@@ -24,7 +24,7 @@ export function deleteProducer(producerId) {
 
 
 export function addProducer(producer){
-  return axios.post('https://tomatobox-backend-4j2l.onrender.com/producers/', {
+  return axios.post('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/producers/', {
     producerId:null,
     first_name:producer.first_name.value,
     last_name:producer.last_name.value,
@@ -65,6 +65,6 @@ export function updateProducer(producerId, producer) {
   };
   }
   return axios
-  .put('https://tomatobox-backend-4j2l.onrender.com/producers/' + producerId + '/', updateProducer)
+  .put('https://backend-tomatobox-dcb46be1ee44.herokuapp.com/producers/' + producerId + '/', updateProducer)
   .then(response => response.data)
 }
